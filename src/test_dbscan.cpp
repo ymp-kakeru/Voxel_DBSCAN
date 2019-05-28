@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
   {
 //    pcl::PointCloud<PointT>::iterator it = leaf_it.operator*();
     std::cout << leaf_it.operator*() << std::endl;
-    std::cout << octree.getVoxelDensityAtPoint( leaf_it.operator*()) << std::endl ;
+//  std::cout << octree.getVoxelDensityAtPoint( leaf_it.operator*()) << std::endl ;
 //    std::cout << octree.getVoxelDensityAtPoint(octree.leaf_begin()) << std::endl ;
   }
 
