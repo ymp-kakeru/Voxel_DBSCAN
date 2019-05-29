@@ -39,7 +39,7 @@ typedef pcl::PointCloud<PointL>::Ptr PointCloudL;
 class VoxelDBSCAN
 {
 public:
-  VoxelDBSCAN();
+  VoxelDBSCAN(std::string & FileName, double resolution_tree);
   bool loadPCD(std::string filename);
   void GenerateOctree();
   void dbscan();
@@ -62,16 +62,14 @@ private:
   PointCloudT displayCloud ;
   pcl::octree::OctreePointCloudDensity<PointT> octree;
 
-  std::string FileName;
-  const double resolution_tree ;
   int displayedDepth ;
   bool displayCubes, showPointsWithCubes, wireframe;
 
 };
 /*****************************************************************************************************/
-VoxelDBSCAN::VoxelDBSCAN():
-  resolution_tree{10.0f},FileName{"/home/ymp/catkin_ws/src/pcl_something/hill_map.pcd.pcd"},
-  octree(resolution_tree),
+VoxelDBSCAN::VoxelDBSCAN(std::string & FileName, double resolution_tree):
+  octree(resolution_tree),cloud_in (new pcl::PointCloud<pcl::PointXYZ>()),
+  displayCloud (new pcl::PointCloud<pcl::PointXYZ>()),
   viz("Octree visualizer"), displayCubes(false),showPointsWithCubes(false),wireframe(true)
 {
   if(!loadPCD(FileName))
@@ -282,13 +280,13 @@ void VoxelDBSCAN:: showCubes(double voxelSideLen)
     double y = displayCloud->points[i].y;
     double z = displayCloud->points[i].z;
 
-    treeWireframe->AddInput(GetCuboid(x - s, x + s, y - s, y + s, z - s, z + s));
+    treeWireframe->AddInputData(GetCuboid(x - s, x + s, y - s, y + s, z - s, z + s)); //after vtk6 AddInputData (befor AddInput)
   }
 
   vtkSmartPointer<vtkActor> treeActor = vtkSmartPointer<vtkActor>::New();
 
   vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-  mapper->SetInput(treeWireframe->GetOutput());
+  mapper->SetInputData(treeWireframe->GetOutput());
   treeActor->SetMapper(mapper);
 
   treeActor->GetProperty()->SetColor(1.0, 1.0, 1.0);
@@ -308,8 +306,11 @@ void VoxelDBSCAN:: extractPointsAtLevel(int depth)
 {
   displayCloud->points.clear();
 
-  pcl::octree::OctreePointCloudVoxelCentroid<pcl::PointXYZ>::Iterator tree_it;
+/*  pcl::octree::OctreePointCloudVoxelCentroid<pcl::PointXYZ>::Iterator tree_it;
   pcl::octree::OctreePointCloudVoxelCentroid<pcl::PointXYZ>::Iterator tree_it_end = octree.end();
+*/
+  pcl::octree::OctreePointCloudDensity<PointT>::Iterator tree_it;
+  pcl::octree::OctreePointCloudDensity<PointT>::Iterator tree_it_end = octree.end();
 
   pcl::PointXYZ pt;
   std::cout << "===== Extracting data at depth " << depth << "... " << std::flush;
@@ -365,6 +366,7 @@ void VoxelDBSCAN::dbscan()
 int main(int argc, char const *argv[])
 {
   /* code */
-  VoxelDBSCAN dbscan;
+  std::string pcd_path(argv[1]);
+  VoxelDBSCAN dbscan(pcd_path, atof(argv[2]));
   return 0;
 }

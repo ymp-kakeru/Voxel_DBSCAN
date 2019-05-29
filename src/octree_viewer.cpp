@@ -45,7 +45,7 @@
 #include <pcl/octree/octree_impl.h>
 
 #include <pcl/filters/filter.h>
-#include "boost.h"
+//#include "boost.h"
 
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
@@ -294,13 +294,13 @@ private:
       double y = displayCloud->points[i].y;
       double z = displayCloud->points[i].z;
 
-      treeWireframe->AddInput(GetCuboid(x - s, x + s, y - s, y + s, z - s, z + s));
+      treeWireframe->AddInputData(GetCuboid(x - s, x + s, y - s, y + s, z - s, z + s));
     }
 
     vtkSmartPointer<vtkActor> treeActor = vtkSmartPointer<vtkActor>::New();
 
     vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-    mapper->SetInput(treeWireframe->GetOutput());
+    mapper->SetInputData(treeWireframe->GetOutput());
     treeActor->SetMapper(mapper);
 
     treeActor->GetProperty()->SetColor(1.0, 1.0, 1.0);

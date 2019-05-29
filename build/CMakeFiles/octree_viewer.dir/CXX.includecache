@@ -6,22 +6,10 @@
 
 #IncludeRegexTransform: 
 
-/home/ymp/catkin_ws/src/Voxel_DBSCAN/src/voxel_dbscan.cpp
-iostream
--
-pcl/point_types.h
--
+/home/ymp/catkin_ws/src/Voxel_DBSCAN/src/octree_viewer.cpp
 pcl/io/pcd_io.h
 -
 pcl/common/time.h
--
-pcl/octree/octree_impl.h
--
-pcl/octree/octree_pointcloud_density.h
--
-pcl/octree/octree_nodes.h
--
-pcl/octree/octree_iterator.h
 -
 pcl/visualization/pcl_visualizer.h
 -
@@ -29,7 +17,9 @@ pcl/visualization/point_cloud_handlers.h
 -
 pcl/visualization/common/common.h
 -
-pcl/visualization/cloud_viewer.h
+pcl/octree/octree.h
+-
+pcl/octree/octree_impl.h
 -
 pcl/filters/filter.h
 -
@@ -2962,14 +2952,6 @@ boost/foreach.hpp
 boost/date_time/posix_time/posix_time.hpp
 -
 boost/filesystem.hpp
--
-
-/usr/local/include/pcl-1.9/pcl/visualization/cloud_viewer.h
-pcl/visualization/pcl_visualizer.h
--
-boost/scoped_ptr.hpp
--
-string
 -
 
 /usr/local/include/pcl-1.9/pcl/visualization/common/actor_map.h

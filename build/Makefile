@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/ymp/catkin_ws/src/Voxel_DBSCAN/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,6 +111,32 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named dbscan
+
+# Build rule for target.
+dbscan: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 dbscan
+.PHONY : dbscan
+
+# fast build rule for target.
+dbscan/fast:
+	$(MAKE) -f CMakeFiles/dbscan.dir/build.make CMakeFiles/dbscan.dir/build
+.PHONY : dbscan/fast
+
+#=============================================================================
+# Target rules for targets named octree_viewer
+
+# Build rule for target.
+octree_viewer: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 octree_viewer
+.PHONY : octree_viewer
+
+# fast build rule for target.
+octree_viewer/fast:
+	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/build
+.PHONY : octree_viewer/fast
+
+#=============================================================================
 # Target rules for targets named test_db
 
 # Build rule for target.
@@ -123,18 +149,32 @@ test_db/fast:
 	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/build
 .PHONY : test_db/fast
 
-#=============================================================================
-# Target rules for targets named dbscan
+src/octree_viewer.o: src/octree_viewer.cpp.o
 
-# Build rule for target.
-dbscan: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 dbscan
-.PHONY : dbscan
+.PHONY : src/octree_viewer.o
 
-# fast build rule for target.
-dbscan/fast:
-	$(MAKE) -f CMakeFiles/dbscan.dir/build.make CMakeFiles/dbscan.dir/build
-.PHONY : dbscan/fast
+# target to build an object file
+src/octree_viewer.cpp.o:
+	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/src/octree_viewer.cpp.o
+.PHONY : src/octree_viewer.cpp.o
+
+src/octree_viewer.i: src/octree_viewer.cpp.i
+
+.PHONY : src/octree_viewer.i
+
+# target to preprocess a source file
+src/octree_viewer.cpp.i:
+	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/src/octree_viewer.cpp.i
+.PHONY : src/octree_viewer.cpp.i
+
+src/octree_viewer.s: src/octree_viewer.cpp.s
+
+.PHONY : src/octree_viewer.s
+
+# target to generate assembly for a file
+src/octree_viewer.cpp.s:
+	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/src/octree_viewer.cpp.s
+.PHONY : src/octree_viewer.cpp.s
 
 src/test_dbscan.o: src/test_dbscan.cpp.o
 
@@ -196,10 +236,14 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... test_db"
 	@echo "... dbscan"
+	@echo "... octree_viewer"
+	@echo "... test_db"
+	@echo "... rebuild_cache"
+	@echo "... src/octree_viewer.o"
+	@echo "... src/octree_viewer.i"
+	@echo "... src/octree_viewer.s"
 	@echo "... src/test_dbscan.o"
 	@echo "... src/test_dbscan.i"
 	@echo "... src/test_dbscan.s"
