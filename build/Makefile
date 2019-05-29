@@ -123,6 +123,19 @@ test_db/fast:
 	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/build
 .PHONY : test_db/fast
 
+#=============================================================================
+# Target rules for targets named dbscan
+
+# Build rule for target.
+dbscan: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 dbscan
+.PHONY : dbscan
+
+# fast build rule for target.
+dbscan/fast:
+	$(MAKE) -f CMakeFiles/dbscan.dir/build.make CMakeFiles/dbscan.dir/build
+.PHONY : dbscan/fast
+
 src/test_dbscan.o: src/test_dbscan.cpp.o
 
 .PHONY : src/test_dbscan.o
@@ -150,6 +163,33 @@ src/test_dbscan.cpp.s:
 	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/src/test_dbscan.cpp.s
 .PHONY : src/test_dbscan.cpp.s
 
+src/voxel_dbscan.o: src/voxel_dbscan.cpp.o
+
+.PHONY : src/voxel_dbscan.o
+
+# target to build an object file
+src/voxel_dbscan.cpp.o:
+	$(MAKE) -f CMakeFiles/dbscan.dir/build.make CMakeFiles/dbscan.dir/src/voxel_dbscan.cpp.o
+.PHONY : src/voxel_dbscan.cpp.o
+
+src/voxel_dbscan.i: src/voxel_dbscan.cpp.i
+
+.PHONY : src/voxel_dbscan.i
+
+# target to preprocess a source file
+src/voxel_dbscan.cpp.i:
+	$(MAKE) -f CMakeFiles/dbscan.dir/build.make CMakeFiles/dbscan.dir/src/voxel_dbscan.cpp.i
+.PHONY : src/voxel_dbscan.cpp.i
+
+src/voxel_dbscan.s: src/voxel_dbscan.cpp.s
+
+.PHONY : src/voxel_dbscan.s
+
+# target to generate assembly for a file
+src/voxel_dbscan.cpp.s:
+	$(MAKE) -f CMakeFiles/dbscan.dir/build.make CMakeFiles/dbscan.dir/src/voxel_dbscan.cpp.s
+.PHONY : src/voxel_dbscan.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -159,9 +199,13 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test_db"
+	@echo "... dbscan"
 	@echo "... src/test_dbscan.o"
 	@echo "... src/test_dbscan.i"
 	@echo "... src/test_dbscan.s"
+	@echo "... src/voxel_dbscan.o"
+	@echo "... src/voxel_dbscan.i"
+	@echo "... src/voxel_dbscan.s"
 .PHONY : help
 
 

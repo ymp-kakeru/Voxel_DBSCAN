@@ -47,8 +47,8 @@ set(LIBS
   ${PCL_LIBRARIES}
 )
 
-#add_executable(dbscan src/voxel_dbscan.cpp)
+add_executable(dbscan src/voxel_dbscan.cpp)
 add_executable(test_db src/test_dbscan.cpp)
 
-#target_link_libraries(dbscan ${LIBS})
+target_link_libraries(dbscan ${LIBS})
 target_link_libraries(test_db ${LIBS})

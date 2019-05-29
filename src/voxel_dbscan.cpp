@@ -1,8 +1,9 @@
 #include <iostream>
-//#include <ros/ros.h>
-//#include <sensor_msgs/PointCloud2.h>
+
 #include <pcl/point_types.h>  
 #include <pcl/io/pcd_io.h>
+#include <pcl/common/time.h>
+
 #include <pcl/octree/octree_impl.h> //octreeの各種テンプレートの使用にはここのマクロ？が必要らしい。Densityだけっぽいけど
 #include <pcl/octree/octree_pointcloud_density.h>
 #include <pcl/octree/octree_nodes.h>
@@ -12,6 +13,19 @@
 #include <pcl/visualization/point_cloud_handlers.h>
 #include <pcl/visualization/common/common.h>
 #include <pcl/visualization/cloud_viewer.h>
+
+#include <pcl/filters/filter.h>
+//#include "boost.h"
+
+#include <vtkRenderer.h>
+#include <vtkRenderWindow.h>
+#include <vtkCubeSource.h>
+
+//=============================
+// Displaying cubes is very long!
+// so we limit their numbers.
+ const int MAX_DISPLAYED_CUBES(15000);
+//=============================
   
 typedef pcl::PointXYZ PointT;
 typedef pcl::PointCloud<PointT>::Ptr PointCloudT;
@@ -60,10 +74,11 @@ VoxelDBSCAN::VoxelDBSCAN():
   octree(resolution_tree),
   viz("Octree visualizer"), displayCubes(false),showPointsWithCubes(false),wireframe(true)
 {
-  loadPCD(FileName);
+  if(!loadPCD(FileName))
+    return;
   GenerateOctree();
   //register keyboard callbacks
-  viz.registerKeyboardCallback(&OctreeViewer::keyboardEventOccurred, *this, 0);
+  viz.registerKeyboardCallback(&VoxelDBSCAN::keyboardEventOccurred, *this, 0);
 
   //key legends
   viz.addText("Keys:", 0, 170, 0.0, 1.0, 0.0, "keys_t");
@@ -88,7 +103,7 @@ VoxelDBSCAN::VoxelDBSCAN():
   run();
 
 }
-
+/***********************************************************************************************************/
 bool VoxelDBSCAN::loadPCD(std::string filename)
 {
   /* include point cloud data */
@@ -102,8 +117,8 @@ bool VoxelDBSCAN::loadPCD(std::string filename)
 
   //remove NaN Points
   std::vector<int> nanIndexes;
-  pcl::removeNaNFromPointCloud(*cloud, *cloud, nanIndexes);
-  std::cout << "Loaded " << cloud->points.size() << " points" << std::endl;
+  pcl::removeNaNFromPointCloud(*cloud_in, *cloud_in, nanIndexes);
+  std::cout << "Loaded " << cloud_in->points.size() << " points" << std::endl;
 
   std::cout << "get PointCloud" << std::endl;
   return true;
@@ -136,21 +151,21 @@ void VoxelDBSCAN::GenerateOctree()
 //  std::cout << octree.getResolution() << std::endl ;
 }
 /**********************************************************************************************************/
-void keyboardEventOccurred(const pcl::visualization::KeyboardEvent &event, void *)
+void VoxelDBSCAN::keyboardEventOccurred(const pcl::visualization::KeyboardEvent &event, void *)
 {
 
   if (event.getKeySym() == "a" && event.keyDown())
   {
-    IncrementLevel();
+    VoxelDBSCAN::IncrementLevel();
   }
   else if (event.getKeySym() == "z" && event.keyDown())
   {
-    DecrementLevel();
+    VoxelDBSCAN::DecrementLevel();
   }
   else if (event.getKeySym() == "d" && event.keyDown())
   {
     displayCubes = !displayCubes;
-    update();
+    VoxelDBSCAN::update();
   }
   else if (event.getKeySym() == "x" && event.keyDown())
   {
@@ -171,7 +186,7 @@ void keyboardEventOccurred(const pcl::visualization::KeyboardEvent &event, void 
   }
 }
 /**********************************************************************************************************/
-void run()
+void VoxelDBSCAN:: run()
 {
   while (!viz.wasStopped())
   {
@@ -181,7 +196,7 @@ void run()
   }
 }
 /**********************************************************************************************************/
-void showLegend(bool showCubes)
+void VoxelDBSCAN:: showLegend(bool showCubes)
 {
   char dataDisplay[256];
   sprintf(dataDisplay, "Displaying data as %s", (showCubes) ? ("CUBES") : ("POINTS"));
@@ -203,7 +218,7 @@ void showLegend(bool showCubes)
     viz.addText("Displaying original cloud", 0, 15, 1.0, 0.0, 0.0, "org_t");
 }
 /**********************************************************************************************************/
-void update()
+void VoxelDBSCAN:: update()
 {
   //remove existing shapes from visualizer
   clearView();
@@ -220,8 +235,8 @@ void update()
     if (showPointsWithCubes)
     {
       //add original cloud in visualizer
-      pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZ> color_handler(cloud, "z");
-      viz.addPointCloud(cloud, color_handler, "cloud");
+      pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZ> color_handler(cloud_in, "z");
+      viz.addPointCloud(cloud_in, color_handler, "cloud_in");
     }
   }
   else
@@ -232,7 +247,7 @@ void update()
   }
 }
 /**********************************************************************************************************/
-void clearView()
+void VoxelDBSCAN:: clearView()
 {
   //remove cubes if any
   vtkRenderer *renderer = viz.getRenderWindow()->GetRenderers()->GetFirstRenderer();
@@ -252,7 +267,7 @@ vtkSmartPointer<vtkPolyData> GetCuboid(double minX, double maxX, double minY, do
   return cube->GetOutput();
 }
 /**********************************************************************************************************/
-void showCubes(double voxelSideLen)
+void VoxelDBSCAN:: showCubes(double voxelSideLen)
 {
   //get the renderer of the visualizer object
   vtkRenderer *renderer = viz.getRenderWindow()->GetRenderers()->GetFirstRenderer();
@@ -289,7 +304,7 @@ void showCubes(double voxelSideLen)
   renderer->AddActor(treeActor);
 }
 /**********************************************************************************************************/
-void extractPointsAtLevel(int depth)
+void VoxelDBSCAN:: extractPointsAtLevel(int depth)
 {
   displayCloud->points.clear();
 
@@ -318,7 +333,7 @@ void extractPointsAtLevel(int depth)
   update();
 }
 /**********************************************************************************************************/
-bool IncrementLevel()
+bool VoxelDBSCAN:: IncrementLevel()
 {
   if (displayedDepth < static_cast<int> (octree.getTreeDepth ()))
   {
@@ -330,7 +345,7 @@ bool IncrementLevel()
     return false;
 }
 /**********************************************************************************************************/
-bool DecrementLevel()
+bool VoxelDBSCAN:: DecrementLevel()
 {
   if (displayedDepth > 0)
   {
