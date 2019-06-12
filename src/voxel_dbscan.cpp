@@ -141,12 +141,6 @@ void VoxelDBSCAN::GenerateOctree()
 //    std::cout << octree.getVoxelDensityAtPoint(PointT(1,1,1)) << std::endl ;
   }
 
-/*  for(pcl::octree::OctreePointCloud<PointT>:: node=octree.leaf_begin(); node!=octree.leaf_end(); ++node)
-  {
-     std::cout << octree.getVoxelDensityAtPoint(it) << std::endl ;
-  }*/
-
-//  std::cout << octree.getResolution() << std::endl ;
 }
 /**********************************************************************************************************/
 void VoxelDBSCAN::keyboardEventOccurred(const pcl::visualization::KeyboardEvent &event, void *)
@@ -325,6 +319,9 @@ void VoxelDBSCAN:: extractPointsAtLevel(int depth)
     pt.y = (voxel_min.y() + voxel_max.y()) / 2.0f;
     pt.z = (voxel_min.z() + voxel_max.z()) / 2.0f;
     displayCloud->points.push_back(pt);
+
+//    std::cout <<  "get voxel density : " << octree.getVoxelDensityAtPoint(PointT (pt.x pt.y pt.z)) << std::endl;
+//    std::cout <<  "get voxel density : " << octree.getVoxelDensityAtPoint(tree_it) << std::endl;
   }
 
   double end = pcl::getTime ();
