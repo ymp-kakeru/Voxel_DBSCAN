@@ -134,12 +134,12 @@ void VoxelDBSCAN::GenerateOctree()
   pcl::octree::OctreePointCloudDensity<PointT>::LeafNodeIterator leaf_it(&octree);
 
   /* Get Leaf Voxel Density */
-  while(*++leaf_it)
+/*  while(*++leaf_it)
   {
-//    std::cout << leaf_it.operator*() << std::endl;
-//    std::cout << octree.getVoxelDensityAtPoint(leaf_it.operator*()) << std::endl ;
-//    std::cout << octree.getVoxelDensityAtPoint(PointT(1,1,1)) << std::endl ;
-  }
+    std::cout << leaf_it.operator*() << std::endl;
+    std::cout << octree.getVoxelDensityAtPoint(leaf_it.operator*()) << std::endl ;
+    std::cout << octree.getVoxelDensityAtPoint(PointT(1,1,1)) << std::endl ;
+  }*/
 
 }
 /**********************************************************************************************************/
@@ -320,7 +320,7 @@ void VoxelDBSCAN:: extractPointsAtLevel(int depth)
     pt.z = (voxel_min.z() + voxel_max.z()) / 2.0f;
     displayCloud->points.push_back(pt);
 
-//    std::cout <<  "get voxel density : " << octree.getVoxelDensityAtPoint(PointT (pt.x pt.y pt.z)) << std::endl;
+    std::cout <<  "get voxel density : " << octree.getVoxelDensityAtPoint(pt) << std::endl;
 //    std::cout <<  "get voxel density : " << octree.getVoxelDensityAtPoint(tree_it) << std::endl;
   }
 
