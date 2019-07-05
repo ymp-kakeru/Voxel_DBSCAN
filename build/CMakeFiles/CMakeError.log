@@ -53,3 +53,58 @@ Makefile:126: ターゲット 'cmTC_a9702/fast' のレシピで失敗しまし�
 make: *** [cmTC_a9702/fast] エラー 2
 
 
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_98026/fast"
+/usr/bin/make -f CMakeFiles/cmTC_98026.dir/build.make CMakeFiles/cmTC_98026.dir/build
+make[1]: ディレクトリ '/home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp' に入ります
+Building C object CMakeFiles/cmTC_98026.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_98026.dir/CheckSymbolExists.c.o   -c /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_98026
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_98026.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_98026.dir/CheckSymbolExists.c.o  -o cmTC_98026 
+CMakeFiles/cmTC_98026.dir/CheckSymbolExists.c.o: 関数 `main' 内:
+CheckSymbolExists.c:(.text+0x16): `pthread_create' に対する定義されていない参照です
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_98026.dir/build.make:97: ターゲット 'cmTC_98026' のレシピで失敗しました
+make[1]: *** [cmTC_98026] エラー 1
+make[1]: ディレクトリ '/home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp' から出ます
+Makefile:126: ターゲット 'cmTC_98026/fast' のレシピで失敗しました
+make: *** [cmTC_98026/fast] エラー 2
+
+File /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_31d05/fast"
+/usr/bin/make -f CMakeFiles/cmTC_31d05.dir/build.make CMakeFiles/cmTC_31d05.dir/build
+make[1]: ディレクトリ '/home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp' に入ります
+Building C object CMakeFiles/cmTC_31d05.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_31d05.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_31d05
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_31d05.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_31d05.dir/CheckFunctionExists.c.o  -o cmTC_31d05 -lpthreads 
+/usr/bin/ld: -lpthreads が見つかりません
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_31d05.dir/build.make:97: ターゲット 'cmTC_31d05' のレシピで失敗しました
+make[1]: *** [cmTC_31d05] エラー 1
+make[1]: ディレクトリ '/home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp' から出ます
+Makefile:126: ターゲット 'cmTC_31d05/fast' のレシピで失敗しました
+make: *** [cmTC_31d05/fast] エラー 2
+
+

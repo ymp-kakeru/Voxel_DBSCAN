@@ -578,3 +578,31 @@ Linking C executable cmTC_0113c
 make[1]: ディレクトリ '/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp' から出ます
 
 
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_b29cd/fast"
+/usr/bin/make -f CMakeFiles/cmTC_b29cd.dir/build.make CMakeFiles/cmTC_b29cd.dir/build
+make[1]: ディレクトリ '/home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp' に入ります
+Building C object CMakeFiles/cmTC_b29cd.dir/CheckIncludeFile.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_b29cd.dir/CheckIncludeFile.c.o   -c /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_b29cd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b29cd.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_b29cd.dir/CheckIncludeFile.c.o  -o cmTC_b29cd 
+make[1]: ディレクトリ '/home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp' から出ます
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_f9908/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f9908.dir/build.make CMakeFiles/cmTC_f9908.dir/build
+make[1]: ディレクトリ '/home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp' に入ります
+Building C object CMakeFiles/cmTC_f9908.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_f9908.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_f9908
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f9908.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_f9908.dir/CheckFunctionExists.c.o  -o cmTC_f9908 -lpthread 
+make[1]: ディレクトリ '/home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/CMakeTmp' から出ます
+
+
