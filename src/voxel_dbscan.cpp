@@ -282,7 +282,6 @@ void VoxelDBSCAN:: showCubes(double voxelSideLen)
   vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
   mapper->SetInputData(treeWireframe->GetOutput());
   treeActor->SetMapper(mapper);
-
   treeActor->GetProperty()->SetColor(1.0, 1.0, 1.0);
   treeActor->GetProperty()->SetLineWidth(2);
   if(wireframe)
@@ -300,9 +299,6 @@ void VoxelDBSCAN:: extractPointsAtLevel(int depth)
 {
   displayCloud->points.clear();
 
-/*  pcl::octree::OctreePointCloudVoxelCentroid<pcl::PointXYZ>::Iterator tree_it;
-  pcl::octree::OctreePointCloudVoxelCentroid<pcl::PointXYZ>::Iterator tree_it_end = octree.end();
-*/
   pcl::octree::OctreePointCloudDensity<PointT>::Iterator tree_it;
   pcl::octree::OctreePointCloudDensity<PointT>::Iterator tree_it_end = octree.end();
 
