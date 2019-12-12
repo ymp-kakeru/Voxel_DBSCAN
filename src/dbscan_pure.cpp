@@ -3,11 +3,9 @@
 #include <pcl/point_types.h>  
 #include <pcl/io/pcd_io.h>
 #include <pcl/common/time.h>
+#include <pcl/filters/extract_indices.h>
 
-#include <pcl/octree/octree_impl.h> //octreeの各種テンプレートの使用にはここのマクロ？が必要らしい。Densityだけっぽいけど
-#include <pcl/octree/octree_pointcloud_density.h>
-#include <pcl/octree/octree_nodes.h>
-#include <pcl/octree/octree_iterator.h>
+#include <pcl/kdtree/kdtree_flann.h>
 
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/visualization/point_cloud_handlers.h>
@@ -21,12 +19,6 @@
 #include <vtkRenderWindow.h>
 #include <vtkCubeSource.h>
 
-//=============================
-// Displaying cubes is very long!
-// so we limit their numbers.
- const int MAX_DISPLAYED_CUBES(15000);
-//=============================
-  
 typedef pcl::PointXYZ PointT;
 typedef pcl::PointCloud<PointT>::Ptr PointCloudT;
 typedef pcl::PointNormal PointN;
@@ -36,45 +28,39 @@ typedef pcl::PointCloud<PointL>::Ptr PointCloudL;
 
 #define debug() std::cerr << __LINE__ << std::endl;
 
-class VoxelDBSCAN
+class DBSCAN
 {
 public:
-  VoxelDBSCAN(std::string & FileName, double resolution_tree);
+  DBSCAN(std::string & FileName, double resolution_tree);
   bool loadPCD(std::string filename);
-  void GenerateOctree();
   void dbscan();
-  void extractPointsAtLevel(int depth);
 
 private:
-  pcl::PointCloud<pcl::PointXYZ>::Ptr xyz;
-  pcl::PointCloud<pcl::PointXYZRGB>::Ptr xyz_rgb;
-
+  void EpsCount(float radius); //count point-number in the radius from point[i]
   PointCloudT cloud_in;
-  pcl::octree::OctreePointCloudDensity<PointT> octree;
+  PointCloudT cloud_out;
+  PointCloudT point_now;
+  PointCloudT point_old;
 
-  int displayedDepth ;
-  bool displayCubes, showPointsWithCubes, wireframe;
+  std::vector<pcl::PointIndices> cluster_indices;
+  int minpts; // 
+  float eps; //radius [m]
 
 };
 
 /*****************************************************************************************************/
-VoxelDBSCAN::VoxelDBSCAN(std::string & FileName, double resolution_tree):
-  octree(resolution_tree),cloud_in (new pcl::PointCloud<pcl::PointXYZ>()),
-  {
+DBSCAN::DBSCAN(std::string & FileName):
+  eps(0.05),minpts(2000)
+{
   if(!loadPCD(FileName))
     return;
-  GenerateOctree();
-  //set current level to half the maximum one
-  //show octree at default depth
-  extractPointsAtLevel(octree.getTreeDepth());
-
-  //run main loop
+  minpts = sqrt(cloud_in.size());
+//run main loop
   run();
-
 }
 
 /***********************************************************************************************************/
-bool VoxelDBSCAN::loadPCD(std::string filename)
+bool DBSCAN::loadPCD(std::string filename)
 {
   /* include point cloud data */
   if(pcl::io::loadPCDFile<PointT>(filename,*cloud_in) == -1)
@@ -88,63 +74,44 @@ bool VoxelDBSCAN::loadPCD(std::string filename)
   std::vector<int> nanIndexes;
   pcl::removeNaNFromPointCloud(*cloud_in, *cloud_in, nanIndexes);
   std::cout << "Loaded " << cloud_in->points.size() << " points" << std::endl;
-
   std::cout << "get PointCloud" << std::endl;
   return true;
 }
-
-/*******************************************************************************************************/
-void VoxelDBSCAN::GenerateOctree()
+/**************************************************************************************************/
+void DBSCAN::EpsCount(float radius)
 {
-  /* make octree  */
-  octree.setInputCloud(cloud_in);
-  octree.addPointsFromInputCloud();
+  pcl::KdTreeFLANN<PointT> kdtree;
+  kdtree.setInputCloud(cloud_in);
+  //K nearest neighbor search K近傍探索
+  std::vector<int> pointIdxNRNSearch(radius);
+  std::vector<float> pointNRNSquaredDistance(radius);
 
-  /* octree leaf iterator */
-  std::vector<int> indexVector;
-  pcl::PointCloud<PointT>::iterator it;
-  pcl::octree::OctreePointCloudDensity<PointT>::LeafNodeIterator leaf_it(&octree);
-
-}
-
-/**********************************************************************************************************/
-void VoxelDBSCAN:: extractPointsAtLevel(int depth)
-{
-  pcl::octree::OctreePointCloudDensity<PointT>::Iterator tree_it;
-  pcl::octree::OctreePointCloudDensity<PointT>::Iterator tree_it_end = octree.end();
-
-  pcl::PointXYZ pt;
-  std::cout << "===== Extracting data at depth " << depth << "... " << std::flush;
-  double start = pcl::getTime ();
-
-  for (tree_it = octree.begin(depth); tree_it!=tree_it_end; ++tree_it)
+  if(kdtree.radiusSearch(point_now,radius,pointIdxNRNSearch,pointNRNSquaredDistance)>0)
   {
-    Eigen::Vector3f voxel_min, voxel_max;
-    octree.getVoxelBounds(tree_it, voxel_min, voxel_max);
-
-    pt.x = (voxel_min.x() + voxel_max.x()) / 2.0f;
-    pt.y = (voxel_min.y() + voxel_max.y()) / 2.0f;
-    pt.z = (voxel_min.z() + voxel_max.z()) / 2.0f;
-
-    if(octree.getVoxelDensityAtPoint(pt) > 20)
-    {
-    std::cout <<  "get voxel density : " << pt.x << ","
-                                         << pt.y << ","
-                                         << pt.z << ","
-                                         << octree.getVoxelDensityAtPoint(pt)
-                                         << std::endl;
-    }
-//    std::cout <<  "get voxel density : " << octree.getVoxelDensityAtPoint(tree_it) << std::endl;
+    std::cout << "size in eps :" << pointIdxNRNSearch.size() << std::endl;
+    return pointIdxNRNSearch.size() ;
   }
+  return 0;
+}
+/****************************************************************************************/
 
-  double end = pcl::getTime ();
-  printf("%.4gs.=====\n",end - start);
+void DBSCAN::dbscan()
+{
+  for(std::size_t i=0; i <= cloud_in.size(); ++i)
+  {
+    DBSCAN::point_now = cloud_in[i] ;
+    if( EpsCount(eps) >= minpts )
+    {
+      
+    }
+  }
 }
  
+/*****************************************************************************************/
 int main(int argc, char const *argv[])
 {
   /* code */
   std::string pcd_path(argv[1]);
-  VoxelDBSCAN dbscan(pcd_path, atof(argv[2]));
+  DBSCAN dbscan(pcd_path, atof(argv[2]));
   return 0;
 }
