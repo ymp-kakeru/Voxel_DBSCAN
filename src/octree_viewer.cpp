@@ -339,6 +339,15 @@ private:
       pt.y = (voxel_min.y() + voxel_max.y()) / 2.0f;
       pt.z = (voxel_min.z() + voxel_max.z()) / 2.0f;
       displayCloud->points.push_back(pt);
+
+      if(octree.getVoxelDensityAtPoint(pt) > 20)
+      {
+        std::cout <<  "get voxel density : " << pt.x << ","
+                                             << pt.y << ","
+                                             << pt.z << ","
+                                             << octree.getVoxelDensityAtPoint(pt)
+                                             << std::endl;
+      }
     }
 
     double end = pcl::getTime ();

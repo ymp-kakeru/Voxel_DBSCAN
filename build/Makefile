@@ -48,18 +48,18 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kakeru/catkin_ws/src/Voxel_DBSCAN
+CMAKE_SOURCE_DIR = /home/ymp/catkin_ws/src/Voxel_DBSCAN
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build
+CMAKE_BINARY_DIR = /home/ymp/catkin_ws/src/Voxel_DBSCAN/build
 
 #=============================================================================
 # Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kakeru/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named dbscan
+# Target rules for targets named test_ite
 
 # Build rule for target.
-dbscan: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 dbscan
-.PHONY : dbscan
+test_ite: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_ite
+.PHONY : test_ite
 
 # fast build rule for target.
-dbscan/fast:
-	$(MAKE) -f CMakeFiles/dbscan.dir/build.make CMakeFiles/dbscan.dir/build
-.PHONY : dbscan/fast
+test_ite/fast:
+	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/build
+.PHONY : test_ite/fast
+
+#=============================================================================
+# Target rules for targets named v_dbscan
+
+# Build rule for target.
+v_dbscan: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 v_dbscan
+.PHONY : v_dbscan
+
+# fast build rule for target.
+v_dbscan/fast:
+	$(MAKE) -f CMakeFiles/v_dbscan.dir/build.make CMakeFiles/v_dbscan.dir/build
+.PHONY : v_dbscan/fast
 
 #=============================================================================
 # Target rules for targets named octree_viewer
@@ -137,6 +150,32 @@ octree_viewer/fast:
 .PHONY : octree_viewer/fast
 
 #=============================================================================
+# Target rules for targets named pure_dbscan
+
+# Build rule for target.
+pure_dbscan: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 pure_dbscan
+.PHONY : pure_dbscan
+
+# fast build rule for target.
+pure_dbscan/fast:
+	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/build
+.PHONY : pure_dbscan/fast
+
+#=============================================================================
+# Target rules for targets named test_kt
+
+# Build rule for target.
+test_kt: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_kt
+.PHONY : test_kt
+
+# fast build rule for target.
+test_kt/fast:
+	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/build
+.PHONY : test_kt/fast
+
+#=============================================================================
 # Target rules for targets named test_db
 
 # Build rule for target.
@@ -148,6 +187,33 @@ test_db: cmake_check_build_system
 test_db/fast:
 	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/build
 .PHONY : test_db/fast
+
+src/dbscan_pure.o: src/dbscan_pure.cpp.o
+
+.PHONY : src/dbscan_pure.o
+
+# target to build an object file
+src/dbscan_pure.cpp.o:
+	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/src/dbscan_pure.cpp.o
+.PHONY : src/dbscan_pure.cpp.o
+
+src/dbscan_pure.i: src/dbscan_pure.cpp.i
+
+.PHONY : src/dbscan_pure.i
+
+# target to preprocess a source file
+src/dbscan_pure.cpp.i:
+	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/src/dbscan_pure.cpp.i
+.PHONY : src/dbscan_pure.cpp.i
+
+src/dbscan_pure.s: src/dbscan_pure.cpp.s
+
+.PHONY : src/dbscan_pure.s
+
+# target to generate assembly for a file
+src/dbscan_pure.cpp.s:
+	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/src/dbscan_pure.cpp.s
+.PHONY : src/dbscan_pure.cpp.s
 
 src/octree_viewer.o: src/octree_viewer.cpp.o
 
@@ -176,6 +242,33 @@ src/octree_viewer.cpp.s:
 	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/src/octree_viewer.cpp.s
 .PHONY : src/octree_viewer.cpp.s
 
+src/test.o: src/test.cpp.o
+
+.PHONY : src/test.o
+
+# target to build an object file
+src/test.cpp.o:
+	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/src/test.cpp.o
+.PHONY : src/test.cpp.o
+
+src/test.i: src/test.cpp.i
+
+.PHONY : src/test.i
+
+# target to preprocess a source file
+src/test.cpp.i:
+	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/src/test.cpp.i
+.PHONY : src/test.cpp.i
+
+src/test.s: src/test.cpp.s
+
+.PHONY : src/test.s
+
+# target to generate assembly for a file
+src/test.cpp.s:
+	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/src/test.cpp.s
+.PHONY : src/test.cpp.s
+
 src/test_dbscan.o: src/test_dbscan.cpp.o
 
 .PHONY : src/test_dbscan.o
@@ -203,13 +296,40 @@ src/test_dbscan.cpp.s:
 	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/src/test_dbscan.cpp.s
 .PHONY : src/test_dbscan.cpp.s
 
+src/test_kdtree.o: src/test_kdtree.cpp.o
+
+.PHONY : src/test_kdtree.o
+
+# target to build an object file
+src/test_kdtree.cpp.o:
+	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/src/test_kdtree.cpp.o
+.PHONY : src/test_kdtree.cpp.o
+
+src/test_kdtree.i: src/test_kdtree.cpp.i
+
+.PHONY : src/test_kdtree.i
+
+# target to preprocess a source file
+src/test_kdtree.cpp.i:
+	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/src/test_kdtree.cpp.i
+.PHONY : src/test_kdtree.cpp.i
+
+src/test_kdtree.s: src/test_kdtree.cpp.s
+
+.PHONY : src/test_kdtree.s
+
+# target to generate assembly for a file
+src/test_kdtree.cpp.s:
+	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/src/test_kdtree.cpp.s
+.PHONY : src/test_kdtree.cpp.s
+
 src/voxel_dbscan.o: src/voxel_dbscan.cpp.o
 
 .PHONY : src/voxel_dbscan.o
 
 # target to build an object file
 src/voxel_dbscan.cpp.o:
-	$(MAKE) -f CMakeFiles/dbscan.dir/build.make CMakeFiles/dbscan.dir/src/voxel_dbscan.cpp.o
+	$(MAKE) -f CMakeFiles/v_dbscan.dir/build.make CMakeFiles/v_dbscan.dir/src/voxel_dbscan.cpp.o
 .PHONY : src/voxel_dbscan.cpp.o
 
 src/voxel_dbscan.i: src/voxel_dbscan.cpp.i
@@ -218,7 +338,7 @@ src/voxel_dbscan.i: src/voxel_dbscan.cpp.i
 
 # target to preprocess a source file
 src/voxel_dbscan.cpp.i:
-	$(MAKE) -f CMakeFiles/dbscan.dir/build.make CMakeFiles/dbscan.dir/src/voxel_dbscan.cpp.i
+	$(MAKE) -f CMakeFiles/v_dbscan.dir/build.make CMakeFiles/v_dbscan.dir/src/voxel_dbscan.cpp.i
 .PHONY : src/voxel_dbscan.cpp.i
 
 src/voxel_dbscan.s: src/voxel_dbscan.cpp.s
@@ -227,7 +347,7 @@ src/voxel_dbscan.s: src/voxel_dbscan.cpp.s
 
 # target to generate assembly for a file
 src/voxel_dbscan.cpp.s:
-	$(MAKE) -f CMakeFiles/dbscan.dir/build.make CMakeFiles/dbscan.dir/src/voxel_dbscan.cpp.s
+	$(MAKE) -f CMakeFiles/v_dbscan.dir/build.make CMakeFiles/v_dbscan.dir/src/voxel_dbscan.cpp.s
 .PHONY : src/voxel_dbscan.cpp.s
 
 # Help Target
@@ -237,16 +357,28 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... dbscan"
+	@echo "... test_ite"
+	@echo "... v_dbscan"
 	@echo "... octree_viewer"
-	@echo "... test_db"
+	@echo "... pure_dbscan"
+	@echo "... test_kt"
 	@echo "... rebuild_cache"
+	@echo "... test_db"
+	@echo "... src/dbscan_pure.o"
+	@echo "... src/dbscan_pure.i"
+	@echo "... src/dbscan_pure.s"
 	@echo "... src/octree_viewer.o"
 	@echo "... src/octree_viewer.i"
 	@echo "... src/octree_viewer.s"
+	@echo "... src/test.o"
+	@echo "... src/test.i"
+	@echo "... src/test.s"
 	@echo "... src/test_dbscan.o"
 	@echo "... src/test_dbscan.i"
 	@echo "... src/test_dbscan.s"
+	@echo "... src/test_kdtree.o"
+	@echo "... src/test_kdtree.i"
+	@echo "... src/test_kdtree.s"
 	@echo "... src/voxel_dbscan.o"
 	@echo "... src/voxel_dbscan.i"
 	@echo "... src/voxel_dbscan.s"

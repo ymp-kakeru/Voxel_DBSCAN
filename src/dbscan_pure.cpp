@@ -6,6 +6,7 @@
 #include <pcl/filters/extract_indices.h>
 
 #include <pcl/kdtree/kdtree_flann.h>
+#include <vector>
 
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/visualization/point_cloud_handlers.h>
@@ -13,7 +14,6 @@
 #include <pcl/visualization/cloud_viewer.h>
 
 #include <pcl/filters/filter.h>
-//#include "boost.h"
 
 #include <vtkRenderer.h>
 #include <vtkRenderWindow.h>
@@ -31,31 +31,33 @@ typedef pcl::PointCloud<PointL>::Ptr PointCloudL;
 class DBSCAN
 {
 public:
-  DBSCAN(std::string & FileName, double resolution_tree);
+  DBSCAN(std::string & FileName, double radius);
   bool loadPCD(std::string filename);
   void dbscan();
+  void run();
 
 private:
-  void EpsCount(float radius); //count point-number in the radius from point[i]
+  double EpsCount(double radius); //count point-number in the radius from point[i]
   PointCloudT cloud_in;
   PointCloudT cloud_out;
-  PointCloudT point_now;
-  PointCloudT point_old;
+  PointT point_now;
+  PointT point_old;
 
   std::vector<pcl::PointIndices> cluster_indices;
   int minpts; // 
-  float eps; //radius [m]
+  double eps; //radius [m]
 
 };
 
 /*****************************************************************************************************/
-DBSCAN::DBSCAN(std::string & FileName):
+DBSCAN::DBSCAN(std::string & FileName, double radius):
   eps(0.05),minpts(2000)
 {
   if(!loadPCD(FileName))
     return;
-  minpts = sqrt(cloud_in.size());
+  minpts = sqrt(cloud_in->size());
 //run main loop
+  eps = radius ; 
   run();
 }
 
@@ -78,28 +80,29 @@ bool DBSCAN::loadPCD(std::string filename)
   return true;
 }
 /**************************************************************************************************/
-void DBSCAN::EpsCount(float radius)
+double DBSCAN::EpsCount(double radius)
 {
   pcl::KdTreeFLANN<PointT> kdtree;
   kdtree.setInputCloud(cloud_in);
   //K nearest neighbor search K近傍探索
-  std::vector<int> pointIdxNRNSearch(radius);
-  std::vector<float> pointNRNSquaredDistance(radius);
+  std::vector<int> pointIdxRadiusSearch;
+  std::vector<float> pointRadiusSquaredDistance;
 
-  if(kdtree.radiusSearch(point_now,radius,pointIdxNRNSearch,pointNRNSquaredDistance)>0)
+  if ( kdtree.radiusSearch(point_now, radius, pointIdxRadiusSearch, pointRadiusSquaredDistance) > 0 )
   {
-    std::cout << "size in eps :" << pointIdxNRNSearch.size() << std::endl;
-    return pointIdxNRNSearch.size() ;
+    std::cout << "size in eps :" << pointIdxRadiusSearch.size() << std::endl;
+    return pointIdxRadiusSearch.size() ;
   }
+
   return 0;
 }
 /****************************************************************************************/
 
 void DBSCAN::dbscan()
 {
-  for(std::size_t i=0; i <= cloud_in.size(); ++i)
+  for(std::size_t i=0; i <= cloud_in->size(); ++i)
   {
-    DBSCAN::point_now = cloud_in[i] ;
+    point_now = cloud_in->points[i] ;
     if( EpsCount(eps) >= minpts )
     {
       
@@ -108,10 +111,19 @@ void DBSCAN::dbscan()
 }
  
 /*****************************************************************************************/
-int main(int argc, char const *argv[])
+
+void DBSCAN::run()
+{
+  EpsCount(eps);
+}
+
+/*****************************************************************************************/
+
+
+int main(int argc, char *argv[])
 {
   /* code */
   std::string pcd_path(argv[1]);
-  DBSCAN dbscan(pcd_path, atof(argv[2]));
+  DBSCAN dbscan(pcd_path,atof(argv[2]));
   return 0;
 }
