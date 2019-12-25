@@ -1,0 +1,26 @@
+Region growing segmentation
+real  0m40.150s
+user  0m38.320s
+sys 0m0.364s
+
+Euclidean segmentaito
+real  0m0.304s
+user  0m0.268s
+sys 0m0.032s
+
+Min-cut segmentation
+real  0m1.713s
+user  0m1.628s
+sys 0m0.084s
+
+real  0m2.438s
+user  0m1.832s
+sys 0m1.700s
+
+
+SuperVoxel segmentation
+real  0m1.496s
+user  0m0.860s
+sys 0m0.104s
+
+

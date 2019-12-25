@@ -31,7 +31,7 @@ public:
   void GenerateOctree();
   bool extractDENSITY(PointT pt);
   bool extractCluster(PointCloudT inputCloud, PointCloudT outputCloud);
-  void searchAdjacent(PointT pt,std::vector<PointT> it);
+  void searchAdjacent(PointT pt,PointCloudT it);
   void run();
 
   /*pcl viewer functions*/
@@ -53,7 +53,7 @@ private:
 VoxelDBSCAN::VoxelDBSCAN(std::string & FileName, double resolution_tree):
   octree(resolution_tree),cloud_in (new pcl::PointCloud<pcl::PointXYZ>()),cloud_out (new pcl::PointCloud<pcl::PointXYZ>()),
   octree_centroid_pts (new pcl::PointCloud<pcl::PointXYZ>()),minpts{0},resolution{resolution_tree},
-  min_cluster{100},max_cluster{3000}
+  min_cluster{500},max_cluster{3000}
 {
   if(!loadPCD(FileName))  
     return;
@@ -138,13 +138,13 @@ bool VoxelDBSCAN:: extractDENSITY(PointT pt)
 /**********************************************************************************************************/
 bool VoxelDBSCAN::extractCluster(PointCloudT inputCloud, PointCloudT outputCloud)
 {
-//  pcl::PointCloud<PointT>::Ptr cloud_out (new pcl::PointCloud<PointT>);
-  std::vector<PointT> neighbor_it;
+  pcl::PointCloud<PointT>::Ptr neighbor_it (new pcl::PointCloud<PointT>);
+//  std::vector<PointT> neighbor_it;
   for(std::size_t i=0; i < inputCloud->points.size(); ++i)
   {
     if(extractDENSITY(inputCloud->points[i]) == true)
     {
-      neighbor_it.push_back(inputCloud->points[i]);
+      neighbor_it->points.push_back(inputCloud->points[i]);
       current = inputCloud->points[i];
       break;
     }
@@ -153,14 +153,14 @@ bool VoxelDBSCAN::extractCluster(PointCloudT inputCloud, PointCloudT outputCloud
   int count=0;
   while(count < 5)
   {
-    if(extractDENSITY(neighbor_it[i])==true)
+    if(extractDENSITY(neighbor_it->points[i])==true)
     {
-      searchAdjacent(neighbor_it[i], neighbor_it);
-      for(int num=0; num <= neighbor_it.size(); ++num)
+      searchAdjacent(neighbor_it->points[i], neighbor_it);
+      for(int num=0; num <= neighbor_it->points.size(); ++num)
       {
-        std::cout << "Neibors == " << neighbor_it.size() << " == " << neighbor_it[num] << std::endl;
+        std::cout << "Neibors == " << neighbor_it->points.size() << " == " << neighbor_it->points[num] << std::endl;
       }
-      outputCloud->points.push_back(neighbor_it[i]);
+      outputCloud->points.push_back(neighbor_it->points[i]);
       count = 0;
     } else {
 //      cloud_out->points.push_back(neighbor_it[i]);
@@ -171,7 +171,7 @@ bool VoxelDBSCAN::extractCluster(PointCloudT inputCloud, PointCloudT outputCloud
 //    std::cout << i << "== neighbor_it ==" << neighbor_it[i] << std::endl;
     i++;
   }
-  std::cout << "size of cloud_out === " << outputCloud->points.size() << std::endl;
+//  std::cout << "size of cloud_out === " << outputCloud->points.size() << std::endl;
 
 ///// extract cloud_out from cloud_in. update cloud_in 
 /*  pcl::PointIndices::Ptr inliers(new pcl::PointIndices());
@@ -189,164 +189,164 @@ bool VoxelDBSCAN::extractCluster(PointCloudT inputCloud, PointCloudT outputCloud
   else return false;
 }
 /**********************************************************************************************************/
-void VoxelDBSCAN::searchAdjacent(PointT pt, std::vector<PointT> it)
+void VoxelDBSCAN::searchAdjacent(PointT pt, PointCloudT it)
 {
   PointT neighbor ;
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y + resolution;
   neighbor.z = pt.z + resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor); 
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y + resolution;
   neighbor.z = pt.z - resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y - resolution;
   neighbor.z = pt.z + resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y - resolution;
   neighbor.z = pt.z - resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
  ////////////////////////////////////////
   neighbor.x = pt.x - resolution;
   neighbor.y = pt.y + resolution;
   neighbor.z = pt.z + resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x - resolution;
   neighbor.y = pt.y + resolution;
   neighbor.z = pt.z - resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x - resolution;
   neighbor.y = pt.y - resolution;
   neighbor.z = pt.z + resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x - resolution;
   neighbor.y = pt.y - resolution;
   neighbor.z = pt.z - resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
   ///////////////////////////////////////
   neighbor.x = pt.x ;
   neighbor.y = pt.y + resolution;
   neighbor.z = pt.z + resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x ;
   neighbor.y = pt.y + resolution;
   neighbor.z = pt.z - resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x ;
   neighbor.y = pt.y - resolution;
   neighbor.z = pt.z + resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x ;
   neighbor.y = pt.y - resolution;
   neighbor.z = pt.z - resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
   ///////////////////////////////////////
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y ;
   neighbor.z = pt.z + resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y ;
   neighbor.z = pt.z - resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y ;
   neighbor.z = pt.z + resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y ;
   neighbor.z = pt.z - resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
   //////////////////////////////////////
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y + resolution;
   neighbor.z = pt.z ;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y + resolution;
   neighbor.z = pt.z ;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y - resolution;
   neighbor.z = pt.z ;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y - resolution;
   neighbor.z = pt.z ;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
   /////////////////////////////////////
   neighbor.x = pt.x ;
   neighbor.y = pt.y ;
   neighbor.z = pt.z + resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x ;
   neighbor.y = pt.y ;
   neighbor.z = pt.z - resolution;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
   //////////////////////////////////////
   neighbor.x = pt.x ;
   neighbor.y = pt.y + resolution;
   neighbor.z = pt.z ;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x ;
   neighbor.y = pt.y + resolution;
   neighbor.z = pt.z ;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
   ///////////////////////////////////////
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y ;
   neighbor.z = pt.z ;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 
   neighbor.x = pt.x + resolution;
   neighbor.y = pt.y ;
   neighbor.z = pt.z ;
   if((pcl::geometry::distance(current,neighbor)+sqrt(resolution)) > (pcl::geometry::distance(current,pt)))
-  it.push_back(neighbor);
+  it->points.push_back(neighbor); 
 }
 /**********************************************************************************************************/
 /*void viewerOneOff(PointCloudT displayCloud )

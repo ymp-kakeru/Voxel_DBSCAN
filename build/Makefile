@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/ymp/catkin_ws/src/Voxel_DBSCAN/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,19 +111,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_ite
-
-# Build rule for target.
-test_ite: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_ite
-.PHONY : test_ite
-
-# fast build rule for target.
-test_ite/fast:
-	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/build
-.PHONY : test_ite/fast
-
-#=============================================================================
 # Target rules for targets named v_dbscan
 
 # Build rule for target.
@@ -137,191 +124,124 @@ v_dbscan/fast:
 .PHONY : v_dbscan/fast
 
 #=============================================================================
-# Target rules for targets named octree_viewer
+# Target rules for targets named euclidean_seg
 
 # Build rule for target.
-octree_viewer: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 octree_viewer
-.PHONY : octree_viewer
+euclidean_seg: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 euclidean_seg
+.PHONY : euclidean_seg
 
 # fast build rule for target.
-octree_viewer/fast:
-	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/build
-.PHONY : octree_viewer/fast
+euclidean_seg/fast:
+	$(MAKE) -f CMakeFiles/euclidean_seg.dir/build.make CMakeFiles/euclidean_seg.dir/build
+.PHONY : euclidean_seg/fast
 
 #=============================================================================
-# Target rules for targets named pure_dbscan
+# Target rules for targets named region_seg
 
 # Build rule for target.
-pure_dbscan: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pure_dbscan
-.PHONY : pure_dbscan
+region_seg: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 region_seg
+.PHONY : region_seg
 
 # fast build rule for target.
-pure_dbscan/fast:
-	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/build
-.PHONY : pure_dbscan/fast
+region_seg/fast:
+	$(MAKE) -f CMakeFiles/region_seg.dir/build.make CMakeFiles/region_seg.dir/build
+.PHONY : region_seg/fast
 
 #=============================================================================
-# Target rules for targets named test_kt
+# Target rules for targets named mincut_seg
 
 # Build rule for target.
-test_kt: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_kt
-.PHONY : test_kt
+mincut_seg: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mincut_seg
+.PHONY : mincut_seg
 
 # fast build rule for target.
-test_kt/fast:
-	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/build
-.PHONY : test_kt/fast
+mincut_seg/fast:
+	$(MAKE) -f CMakeFiles/mincut_seg.dir/build.make CMakeFiles/mincut_seg.dir/build
+.PHONY : mincut_seg/fast
 
-#=============================================================================
-# Target rules for targets named test_db
+src/euclidean_seg.o: src/euclidean_seg.cpp.o
 
-# Build rule for target.
-test_db: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_db
-.PHONY : test_db
-
-# fast build rule for target.
-test_db/fast:
-	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/build
-.PHONY : test_db/fast
-
-src/dbscan_pure.o: src/dbscan_pure.cpp.o
-
-.PHONY : src/dbscan_pure.o
+.PHONY : src/euclidean_seg.o
 
 # target to build an object file
-src/dbscan_pure.cpp.o:
-	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/src/dbscan_pure.cpp.o
-.PHONY : src/dbscan_pure.cpp.o
+src/euclidean_seg.cpp.o:
+	$(MAKE) -f CMakeFiles/euclidean_seg.dir/build.make CMakeFiles/euclidean_seg.dir/src/euclidean_seg.cpp.o
+.PHONY : src/euclidean_seg.cpp.o
 
-src/dbscan_pure.i: src/dbscan_pure.cpp.i
+src/euclidean_seg.i: src/euclidean_seg.cpp.i
 
-.PHONY : src/dbscan_pure.i
+.PHONY : src/euclidean_seg.i
 
 # target to preprocess a source file
-src/dbscan_pure.cpp.i:
-	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/src/dbscan_pure.cpp.i
-.PHONY : src/dbscan_pure.cpp.i
+src/euclidean_seg.cpp.i:
+	$(MAKE) -f CMakeFiles/euclidean_seg.dir/build.make CMakeFiles/euclidean_seg.dir/src/euclidean_seg.cpp.i
+.PHONY : src/euclidean_seg.cpp.i
 
-src/dbscan_pure.s: src/dbscan_pure.cpp.s
+src/euclidean_seg.s: src/euclidean_seg.cpp.s
 
-.PHONY : src/dbscan_pure.s
+.PHONY : src/euclidean_seg.s
 
 # target to generate assembly for a file
-src/dbscan_pure.cpp.s:
-	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/src/dbscan_pure.cpp.s
-.PHONY : src/dbscan_pure.cpp.s
+src/euclidean_seg.cpp.s:
+	$(MAKE) -f CMakeFiles/euclidean_seg.dir/build.make CMakeFiles/euclidean_seg.dir/src/euclidean_seg.cpp.s
+.PHONY : src/euclidean_seg.cpp.s
 
-src/octree_viewer.o: src/octree_viewer.cpp.o
+src/mincut_seg.o: src/mincut_seg.cpp.o
 
-.PHONY : src/octree_viewer.o
+.PHONY : src/mincut_seg.o
 
 # target to build an object file
-src/octree_viewer.cpp.o:
-	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/src/octree_viewer.cpp.o
-.PHONY : src/octree_viewer.cpp.o
+src/mincut_seg.cpp.o:
+	$(MAKE) -f CMakeFiles/mincut_seg.dir/build.make CMakeFiles/mincut_seg.dir/src/mincut_seg.cpp.o
+.PHONY : src/mincut_seg.cpp.o
 
-src/octree_viewer.i: src/octree_viewer.cpp.i
+src/mincut_seg.i: src/mincut_seg.cpp.i
 
-.PHONY : src/octree_viewer.i
+.PHONY : src/mincut_seg.i
 
 # target to preprocess a source file
-src/octree_viewer.cpp.i:
-	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/src/octree_viewer.cpp.i
-.PHONY : src/octree_viewer.cpp.i
+src/mincut_seg.cpp.i:
+	$(MAKE) -f CMakeFiles/mincut_seg.dir/build.make CMakeFiles/mincut_seg.dir/src/mincut_seg.cpp.i
+.PHONY : src/mincut_seg.cpp.i
 
-src/octree_viewer.s: src/octree_viewer.cpp.s
+src/mincut_seg.s: src/mincut_seg.cpp.s
 
-.PHONY : src/octree_viewer.s
+.PHONY : src/mincut_seg.s
 
 # target to generate assembly for a file
-src/octree_viewer.cpp.s:
-	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/src/octree_viewer.cpp.s
-.PHONY : src/octree_viewer.cpp.s
+src/mincut_seg.cpp.s:
+	$(MAKE) -f CMakeFiles/mincut_seg.dir/build.make CMakeFiles/mincut_seg.dir/src/mincut_seg.cpp.s
+.PHONY : src/mincut_seg.cpp.s
 
-src/test.o: src/test.cpp.o
+src/region_seg.o: src/region_seg.cpp.o
 
-.PHONY : src/test.o
+.PHONY : src/region_seg.o
 
 # target to build an object file
-src/test.cpp.o:
-	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/src/test.cpp.o
-.PHONY : src/test.cpp.o
+src/region_seg.cpp.o:
+	$(MAKE) -f CMakeFiles/region_seg.dir/build.make CMakeFiles/region_seg.dir/src/region_seg.cpp.o
+.PHONY : src/region_seg.cpp.o
 
-src/test.i: src/test.cpp.i
+src/region_seg.i: src/region_seg.cpp.i
 
-.PHONY : src/test.i
-
-# target to preprocess a source file
-src/test.cpp.i:
-	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/src/test.cpp.i
-.PHONY : src/test.cpp.i
-
-src/test.s: src/test.cpp.s
-
-.PHONY : src/test.s
-
-# target to generate assembly for a file
-src/test.cpp.s:
-	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/src/test.cpp.s
-.PHONY : src/test.cpp.s
-
-src/test_dbscan.o: src/test_dbscan.cpp.o
-
-.PHONY : src/test_dbscan.o
-
-# target to build an object file
-src/test_dbscan.cpp.o:
-	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/src/test_dbscan.cpp.o
-.PHONY : src/test_dbscan.cpp.o
-
-src/test_dbscan.i: src/test_dbscan.cpp.i
-
-.PHONY : src/test_dbscan.i
+.PHONY : src/region_seg.i
 
 # target to preprocess a source file
-src/test_dbscan.cpp.i:
-	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/src/test_dbscan.cpp.i
-.PHONY : src/test_dbscan.cpp.i
+src/region_seg.cpp.i:
+	$(MAKE) -f CMakeFiles/region_seg.dir/build.make CMakeFiles/region_seg.dir/src/region_seg.cpp.i
+.PHONY : src/region_seg.cpp.i
 
-src/test_dbscan.s: src/test_dbscan.cpp.s
+src/region_seg.s: src/region_seg.cpp.s
 
-.PHONY : src/test_dbscan.s
-
-# target to generate assembly for a file
-src/test_dbscan.cpp.s:
-	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/src/test_dbscan.cpp.s
-.PHONY : src/test_dbscan.cpp.s
-
-src/test_kdtree.o: src/test_kdtree.cpp.o
-
-.PHONY : src/test_kdtree.o
-
-# target to build an object file
-src/test_kdtree.cpp.o:
-	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/src/test_kdtree.cpp.o
-.PHONY : src/test_kdtree.cpp.o
-
-src/test_kdtree.i: src/test_kdtree.cpp.i
-
-.PHONY : src/test_kdtree.i
-
-# target to preprocess a source file
-src/test_kdtree.cpp.i:
-	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/src/test_kdtree.cpp.i
-.PHONY : src/test_kdtree.cpp.i
-
-src/test_kdtree.s: src/test_kdtree.cpp.s
-
-.PHONY : src/test_kdtree.s
+.PHONY : src/region_seg.s
 
 # target to generate assembly for a file
-src/test_kdtree.cpp.s:
-	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/src/test_kdtree.cpp.s
-.PHONY : src/test_kdtree.cpp.s
+src/region_seg.cpp.s:
+	$(MAKE) -f CMakeFiles/region_seg.dir/build.make CMakeFiles/region_seg.dir/src/region_seg.cpp.s
+.PHONY : src/region_seg.cpp.s
 
 src/voxel_dbscan.o: src/voxel_dbscan.cpp.o
 
@@ -356,29 +276,21 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
-	@echo "... test_ite"
-	@echo "... v_dbscan"
-	@echo "... octree_viewer"
-	@echo "... pure_dbscan"
-	@echo "... test_kt"
 	@echo "... rebuild_cache"
-	@echo "... test_db"
-	@echo "... src/dbscan_pure.o"
-	@echo "... src/dbscan_pure.i"
-	@echo "... src/dbscan_pure.s"
-	@echo "... src/octree_viewer.o"
-	@echo "... src/octree_viewer.i"
-	@echo "... src/octree_viewer.s"
-	@echo "... src/test.o"
-	@echo "... src/test.i"
-	@echo "... src/test.s"
-	@echo "... src/test_dbscan.o"
-	@echo "... src/test_dbscan.i"
-	@echo "... src/test_dbscan.s"
-	@echo "... src/test_kdtree.o"
-	@echo "... src/test_kdtree.i"
-	@echo "... src/test_kdtree.s"
+	@echo "... v_dbscan"
+	@echo "... euclidean_seg"
+	@echo "... edit_cache"
+	@echo "... region_seg"
+	@echo "... mincut_seg"
+	@echo "... src/euclidean_seg.o"
+	@echo "... src/euclidean_seg.i"
+	@echo "... src/euclidean_seg.s"
+	@echo "... src/mincut_seg.o"
+	@echo "... src/mincut_seg.i"
+	@echo "... src/mincut_seg.s"
+	@echo "... src/region_seg.o"
+	@echo "... src/region_seg.i"
+	@echo "... src/region_seg.s"
 	@echo "... src/voxel_dbscan.o"
 	@echo "... src/voxel_dbscan.i"
 	@echo "... src/voxel_dbscan.s"

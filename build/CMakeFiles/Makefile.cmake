@@ -246,10 +246,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/test_ite.dir/DependInfo.cmake"
   "CMakeFiles/v_dbscan.dir/DependInfo.cmake"
-  "CMakeFiles/octree_viewer.dir/DependInfo.cmake"
-  "CMakeFiles/pure_dbscan.dir/DependInfo.cmake"
-  "CMakeFiles/test_kt.dir/DependInfo.cmake"
-  "CMakeFiles/test_db.dir/DependInfo.cmake"
+  "CMakeFiles/euclidean_seg.dir/DependInfo.cmake"
+  "CMakeFiles/region_seg.dir/DependInfo.cmake"
+  "CMakeFiles/mincut_seg.dir/DependInfo.cmake"
   )

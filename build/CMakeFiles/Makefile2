@@ -60,50 +60,13 @@ CMAKE_SOURCE_DIR = /home/ymp/catkin_ws/src/Voxel_DBSCAN
 CMAKE_BINARY_DIR = /home/ymp/catkin_ws/src/Voxel_DBSCAN/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_ite.dir
-
-# All Build rule for target.
-CMakeFiles/test_ite.dir/all:
-	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/depend
-	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles --progress-num=7,8 "Built target test_ite"
-.PHONY : CMakeFiles/test_ite.dir/all
-
-# Include target in all.
-all: CMakeFiles/test_ite.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_ite.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test_ite.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_ite.dir/rule
-
-# Convenience name for target.
-test_ite: CMakeFiles/test_ite.dir/rule
-
-.PHONY : test_ite
-
-# clean rule for target.
-CMakeFiles/test_ite.dir/clean:
-	$(MAKE) -f CMakeFiles/test_ite.dir/build.make CMakeFiles/test_ite.dir/clean
-.PHONY : CMakeFiles/test_ite.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/test_ite.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/v_dbscan.dir
 
 # All Build rule for target.
 CMakeFiles/v_dbscan.dir/all:
 	$(MAKE) -f CMakeFiles/v_dbscan.dir/build.make CMakeFiles/v_dbscan.dir/depend
 	$(MAKE) -f CMakeFiles/v_dbscan.dir/build.make CMakeFiles/v_dbscan.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles --progress-num=11,12 "Built target v_dbscan"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles --progress-num=7,8 "Built target v_dbscan"
 .PHONY : CMakeFiles/v_dbscan.dir/all
 
 # Include target in all.
@@ -134,150 +97,113 @@ clean: CMakeFiles/v_dbscan.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/octree_viewer.dir
+# Target rules for target CMakeFiles/euclidean_seg.dir
 
 # All Build rule for target.
-CMakeFiles/octree_viewer.dir/all:
-	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/depend
-	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles --progress-num=1,2 "Built target octree_viewer"
-.PHONY : CMakeFiles/octree_viewer.dir/all
+CMakeFiles/euclidean_seg.dir/all:
+	$(MAKE) -f CMakeFiles/euclidean_seg.dir/build.make CMakeFiles/euclidean_seg.dir/depend
+	$(MAKE) -f CMakeFiles/euclidean_seg.dir/build.make CMakeFiles/euclidean_seg.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles --progress-num=1,2 "Built target euclidean_seg"
+.PHONY : CMakeFiles/euclidean_seg.dir/all
 
 # Include target in all.
-all: CMakeFiles/octree_viewer.dir/all
+all: CMakeFiles/euclidean_seg.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/octree_viewer.dir/rule: cmake_check_build_system
+CMakeFiles/euclidean_seg.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/octree_viewer.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/euclidean_seg.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 0
-.PHONY : CMakeFiles/octree_viewer.dir/rule
+.PHONY : CMakeFiles/euclidean_seg.dir/rule
 
 # Convenience name for target.
-octree_viewer: CMakeFiles/octree_viewer.dir/rule
+euclidean_seg: CMakeFiles/euclidean_seg.dir/rule
 
-.PHONY : octree_viewer
-
-# clean rule for target.
-CMakeFiles/octree_viewer.dir/clean:
-	$(MAKE) -f CMakeFiles/octree_viewer.dir/build.make CMakeFiles/octree_viewer.dir/clean
-.PHONY : CMakeFiles/octree_viewer.dir/clean
+.PHONY : euclidean_seg
 
 # clean rule for target.
-clean: CMakeFiles/octree_viewer.dir/clean
+CMakeFiles/euclidean_seg.dir/clean:
+	$(MAKE) -f CMakeFiles/euclidean_seg.dir/build.make CMakeFiles/euclidean_seg.dir/clean
+.PHONY : CMakeFiles/euclidean_seg.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/euclidean_seg.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/pure_dbscan.dir
+# Target rules for target CMakeFiles/region_seg.dir
 
 # All Build rule for target.
-CMakeFiles/pure_dbscan.dir/all:
-	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/depend
-	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles --progress-num=3,4 "Built target pure_dbscan"
-.PHONY : CMakeFiles/pure_dbscan.dir/all
+CMakeFiles/region_seg.dir/all:
+	$(MAKE) -f CMakeFiles/region_seg.dir/build.make CMakeFiles/region_seg.dir/depend
+	$(MAKE) -f CMakeFiles/region_seg.dir/build.make CMakeFiles/region_seg.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles --progress-num=5,6 "Built target region_seg"
+.PHONY : CMakeFiles/region_seg.dir/all
 
 # Include target in all.
-all: CMakeFiles/pure_dbscan.dir/all
+all: CMakeFiles/region_seg.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/pure_dbscan.dir/rule: cmake_check_build_system
+CMakeFiles/region_seg.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/pure_dbscan.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/region_seg.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 0
-.PHONY : CMakeFiles/pure_dbscan.dir/rule
+.PHONY : CMakeFiles/region_seg.dir/rule
 
 # Convenience name for target.
-pure_dbscan: CMakeFiles/pure_dbscan.dir/rule
+region_seg: CMakeFiles/region_seg.dir/rule
 
-.PHONY : pure_dbscan
-
-# clean rule for target.
-CMakeFiles/pure_dbscan.dir/clean:
-	$(MAKE) -f CMakeFiles/pure_dbscan.dir/build.make CMakeFiles/pure_dbscan.dir/clean
-.PHONY : CMakeFiles/pure_dbscan.dir/clean
+.PHONY : region_seg
 
 # clean rule for target.
-clean: CMakeFiles/pure_dbscan.dir/clean
+CMakeFiles/region_seg.dir/clean:
+	$(MAKE) -f CMakeFiles/region_seg.dir/build.make CMakeFiles/region_seg.dir/clean
+.PHONY : CMakeFiles/region_seg.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/region_seg.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/test_kt.dir
+# Target rules for target CMakeFiles/mincut_seg.dir
 
 # All Build rule for target.
-CMakeFiles/test_kt.dir/all:
-	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/depend
-	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles --progress-num=9,10 "Built target test_kt"
-.PHONY : CMakeFiles/test_kt.dir/all
+CMakeFiles/mincut_seg.dir/all:
+	$(MAKE) -f CMakeFiles/mincut_seg.dir/build.make CMakeFiles/mincut_seg.dir/depend
+	$(MAKE) -f CMakeFiles/mincut_seg.dir/build.make CMakeFiles/mincut_seg.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles --progress-num=3,4 "Built target mincut_seg"
+.PHONY : CMakeFiles/mincut_seg.dir/all
 
 # Include target in all.
-all: CMakeFiles/test_kt.dir/all
+all: CMakeFiles/mincut_seg.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/test_kt.dir/rule: cmake_check_build_system
+CMakeFiles/mincut_seg.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test_kt.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/mincut_seg.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_kt.dir/rule
+.PHONY : CMakeFiles/mincut_seg.dir/rule
 
 # Convenience name for target.
-test_kt: CMakeFiles/test_kt.dir/rule
+mincut_seg: CMakeFiles/mincut_seg.dir/rule
 
-.PHONY : test_kt
-
-# clean rule for target.
-CMakeFiles/test_kt.dir/clean:
-	$(MAKE) -f CMakeFiles/test_kt.dir/build.make CMakeFiles/test_kt.dir/clean
-.PHONY : CMakeFiles/test_kt.dir/clean
+.PHONY : mincut_seg
 
 # clean rule for target.
-clean: CMakeFiles/test_kt.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/test_db.dir
-
-# All Build rule for target.
-CMakeFiles/test_db.dir/all:
-	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/depend
-	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles --progress-num=5,6 "Built target test_db"
-.PHONY : CMakeFiles/test_db.dir/all
-
-# Include target in all.
-all: CMakeFiles/test_db.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/test_db.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test_db.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ymp/catkin_ws/src/Voxel_DBSCAN/build/CMakeFiles 0
-.PHONY : CMakeFiles/test_db.dir/rule
-
-# Convenience name for target.
-test_db: CMakeFiles/test_db.dir/rule
-
-.PHONY : test_db
+CMakeFiles/mincut_seg.dir/clean:
+	$(MAKE) -f CMakeFiles/mincut_seg.dir/build.make CMakeFiles/mincut_seg.dir/clean
+.PHONY : CMakeFiles/mincut_seg.dir/clean
 
 # clean rule for target.
-CMakeFiles/test_db.dir/clean:
-	$(MAKE) -f CMakeFiles/test_db.dir/build.make CMakeFiles/test_db.dir/clean
-.PHONY : CMakeFiles/test_db.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/test_db.dir/clean
+clean: CMakeFiles/mincut_seg.dir/clean
 
 .PHONY : clean
 
